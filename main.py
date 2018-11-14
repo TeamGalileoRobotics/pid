@@ -26,6 +26,8 @@ def run():
 	while True:
 		error = (IDEAL - get_light()) / (DIFF / 2)
 		integral += error
+		if integral > MAX_I: integral = MAX_I
+		elif integral < -MAX_I: integral = -MAX_I
 		derivative = error - previous_error
 		output = KP * error + KI * integral + KD * derivative
 		previous_error = error
