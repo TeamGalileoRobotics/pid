@@ -11,10 +11,13 @@ SPEED = 20.0
 DIFF = WHITE - BLACK
 IDEAL = (WHITE + BLACK) / 2.0
 MAX_OUTPUT = 50
+MAX_I = 15
 
-KP = 50.0
-KI = 1.0
+KP = 10.0
+KI = 0.4
 KD = 100.0
+
+DEBUG = False
 
 def run():
 	previous_error = 0.0
@@ -27,10 +30,11 @@ def run():
 		output = KP * error + KI * integral + KD * derivative
 		previous_error = error
 
-		print "------\n"
-		print KP * error
-		print KI * integral
-		print KD * derivative
+		if DEBUG:
+			print "------\n"
+			print KP * error
+			print KI * integral
+			print KD * derivative
 
 		if output > MAX_OUTPUT: output = MAX_OUTPUT
 		if output < -MAX_OUTPUT: output = -MAX_OUTPUT
